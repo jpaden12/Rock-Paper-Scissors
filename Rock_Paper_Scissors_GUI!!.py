@@ -2,7 +2,7 @@ import random
 import easygui
 from easygui import *
 
-# Title Screen and variables
+#Variables
 Title = 'Rock Paper Scissors'
 Plscore = 0
 Cscore = 0
@@ -68,30 +68,36 @@ def GM2():
     ('Rock', 'Paper', 'Scissors'))
     CPUChoice = random.choice(Choices)
     
+ 
 
 
 
+##----------------------------------------
+#Title Screen, Credits, and Exit Method
 
-a = buttonbox('Welcome to Rock Paper Scissors!!1!', Title ,('Credits', 'Start', 'Exit'), 'Logo.png')
+TitleScreen = True
 
-print(a)
-
-if a == 'Credits':
-    msgbox("This game was developed and published by Jamal Paden \n Developed using Python 3.4 and EasyGUI \n (C) 2015 Jamal Paden",'Credits',ok_button="Back")
-
-elif a == 'Exit':
-    #Insert Exit method here
-    msgbox("Insert Exit method here")
-
-else:
-    b = buttonbox('Game Modes', 'Game Modes',('Player 1 vs. CPU', 'Player 1 vs. Player 2'))
-    print(b)
-
-    if b == 'Player 1 vs. CPU':
-        GM1()
-    #Put the finished second game mode here
-    else:
-        Pass
+while TitleScreen == True:
+    a = buttonbox('Welcome to Rock Paper Scissors!!1!', Title ,('Credits', 'Start', 'Exit'), 'Logo.png')
+    print(a)
+    if a == 'Credits':
+        TitleScreen == False
+        msgbox("This game was developed and published by Jamal Paden \n Developed using Python 3.4 and EasyGUI \n (C) 2015 Jamal Paden",'Credits',ok_button="Back")
+        TitleScreen == True
+    if a == 'Exit':
+        TitleScreen == False
+        #Insert Exit method here
+        msgbox("Insert Exit method here")
+        TitleScreen == True
+    if a == 'Start':
+        TitleScreen == False
+        b = buttonbox('Game Modes', 'Game Modes',('Player 1 vs. CPU', 'Player 1 vs. Player 2'))
+        print(b)
+        if b == 'Player 1 vs. CPU':
+            GM1()
+        #Put the finished second game mode here
+        else:
+            Pass
 
 
 
