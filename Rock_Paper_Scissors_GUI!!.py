@@ -6,13 +6,15 @@ from easygui import *
 Title = 'Rock Paper Scissors'
 Plscore = 0
 Cscore = 0
-
 Choices = ['Rock', 'Paper', 'Scissors']
 
 
 
 #The function that chooses the winner
-def winner():
+def winner(name):
+    Player1 = buttonbox(name[5:] , Title,\
+    ('Rock', 'Paper', 'Scissors'))
+    CPUChoice = random.choice(Choices)
     if Player1 == CPUChoice:
         return 'Tie'
     elif Player1 == 'Rock':
@@ -33,21 +35,20 @@ def winner():
         
 
 #GameMode 1: Player 1 vs. CPU
-#PN = Player Name
 #Number = The number of games to be played
 def GM1():
     number = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
-    PN = enterbox('Enter you name.', Title, 'Name: ')
-    Player1 = buttonbox(PN[5:] , Title,\
-    ('Rock', 'Paper', 'Scissors'))
-    CPUChoice = random.choice(Choices)
-    funct = winner()
+    PlayerName= enterbox('Enter you name.', Title, 'Name: ')
+   ## Player1 = buttonbox(PN[5:] , Title,\
+    #('Rock', 'Paper', 'Scissors'))
+    # CPUChoice = random.choice(Choices)
+    funct = winner(PlayerName)
 
 
 
     ####Need to fix the winner function.######
     if funct == 'CPU':
-        msgbox('Sorry! You lose.', Title,'Loser_Picture.jpg')
+        msgbox('Sorry! You lose.', Title,'OK','Loser_Picture.jpg')
     elif funct == 'Player1':
         #Insert "You Win" Picture here
         msgbox('Congratulations! You WIN!!', Title, ok_button = 'Go Back')
