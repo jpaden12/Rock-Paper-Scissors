@@ -38,7 +38,7 @@ def winner(name):
 #Number = The number of games to be played
 def GM1():
     number = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
-    PlayerName= enterbox('Enter you name.', Title, 'Name: ')
+    PlayerName = enterbox('Enter you name.', Title, 'Name: ')
    ## Player1 = buttonbox(PN[5:] , Title,\
     #('Rock', 'Paper', 'Scissors'))
     # CPUChoice = random.choice(Choices)
