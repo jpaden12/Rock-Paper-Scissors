@@ -2,16 +2,17 @@ import random
 import easygui
 from easygui import *
 
-#Variables
+# Variables
 Title = 'Rock Paper Scissors'
 Plscore = 0
+P2score = 0
 Cscore = 0
 Choices = ['Rock', 'Paper', 'Scissors']
 
 
 
-#The function that chooses the winner
-def winner(name):
+# The functions that choose the winner
+def GM1winner(name):
     Player1 = buttonbox(name[5:] , Title,\
     ('Rock', 'Paper', 'Scissors'))
     CPUChoice = random.choice(Choices)
@@ -32,17 +33,42 @@ def winner(name):
             return 'Player1'
         elif CPUChoice == 'Scissors':
             return 'CPU'
+
+def GM2Winner():
+    Player1 = buttonbox(PN[5:], Title \
+    ('Rock', 'Paper', 'Scissors') )
+    Player2 = buttonbox(P2N[5:], Title \
+    ('Rock', 'Paper', 'Scissors') )
+    if Player1 == Player2:
+        return 'Tie'
+    elif Player1 == 'Rock':
+        if Player2 == 'Paper':
+            return 'Player1'
+        elif Player2 == 'Scissors':
+            return 'Player1'
+    elif Player1 == 'Paper':
+        if Player2 == 'Scissors':
+            return 'Player2'
+        elif Player2 == 'Rock':
+            return 'Player1'
+    elif Player1 == 'Scissors':
+        if Player2 == 'Rock':
+            return 'Player2'
+        elif Player2 == 'Paper':
+            return 'Player1'
+    
+    
         
 
-#GameMode 1: Player 1 vs. CPU
-#Number = The number of games to be played
+# GameMode 1: Player 1 vs. CPU
+# Number = The number of games to be played
 def GM1():
-    number = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
+    choose = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
     PlayerName = enterbox('Enter you name.', Title, 'Name: ')
-   ## Player1 = buttonbox(PN[5:] , Title,\
-    #('Rock', 'Paper', 'Scissors'))
-    # CPUChoice = random.choice(Choices)
-    funct = winner(PlayerName)
+    Player1 = buttonbox(PN[5:] , Title,\
+    ('Rock', 'Paper', 'Scissors'))
+    CPUChoice = random.choice(Choices)
+    funct = GM1winner(PlayerName)
 
 
 
@@ -64,10 +90,12 @@ def GM2():
     PN = enterbox('Player 1, enter your name.', Title, 'Name: ')
     P2N = enterbox('Player 2, enter your name.', Title, 'Name: ')
     #Insert Player 1 and Player 2 variables here
-    PlayerChoice = buttonbox('Player 1 name and Player 2 name', Title,\
+    PlayerChoice = buttonbox('Player 1 choose', Title,\
     ('Rock', 'Paper', 'Scissors'))
-    CPUChoice = random.choice(Choices)
-    
+    Player2Choice = buttonbox('Player 2 choose', Title, \
+    ('Rock', 'Paper', 'Scissors'))
+    otherfunct = GM2Winner()
+        #Put the P1 v. P2 parameter here
  
 
 
@@ -78,11 +106,10 @@ def GM2():
 TitleScreen = True
 
 while TitleScreen == True:
-    a = buttonbox('Welcome to Rock Paper Scissors!!1!', Title ,('Credits', 'Start', 'Exit'), 'Logo.png')
-    print(a)
+    a = buttonbox('Welcome to Rock Paper Scissors!!!', Title ,('Credits', 'Start', 'Exit'), 'Logo.png')
     if a == 'Credits':
         TitleScreen == False
-        msgbox("This game was developed and published by Jamal Paden \n Developed using Python 3.4 and EasyGUI \n (C) 2015 Jamal Paden",'Credits',ok_button="Back")
+        msgbox("This game was developed using Python 3.4 and EasyGUI \n (C) 2015 Jamal Paden",'Credits',ok_button="Back")
         TitleScreen == True
     if a == 'Exit':
         TitleScreen == False
@@ -95,9 +122,8 @@ while TitleScreen == True:
         print(b)
         if b == 'Player 1 vs. CPU':
             GM1()
-        #Put the finished second game mode here
         else:
-            Pass
+            GM2()
 
 
 
