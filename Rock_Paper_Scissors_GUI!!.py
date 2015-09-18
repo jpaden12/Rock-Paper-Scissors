@@ -7,7 +7,7 @@ Title = 'Rock Paper Scissors'
 Plscore = 0
 P2score = 0
 Cscore = 0
-Choices = ['Rock', 'Paper', 'Scissors']
+
 
 
 
@@ -15,6 +15,7 @@ Choices = ['Rock', 'Paper', 'Scissors']
 def GM1winner(name):
     Player1 = buttonbox(name[5:] , Title,\
     ('Rock', 'Paper', 'Scissors'))
+    Choices = ['Rock', 'Paper', 'Scissors']
     CPUChoice = random.choice(Choices)
     if Player1 == CPUChoice:
         return 'Tie'
@@ -33,12 +34,12 @@ def GM1winner(name):
             return 'Player1'
         elif CPUChoice == 'Scissors':
             return 'CPU'
-
-def GM2Winner():
-    Player1 = buttonbox(PN[5:], Title \
-    ('Rock', 'Paper', 'Scissors') )
-    Player2 = buttonbox(P2N[5:], Title \
-    ('Rock', 'Paper', 'Scissors') )
+    
+def GM2Winner(P1name, P2name):
+    Player1 = buttonbox(P1name[5:], Title,\
+    ('Rock', 'Paper', 'Scissors'))
+    Player2 = buttonbox(P2name[5:], Title, \
+    ('Rock', 'Paper', 'Scissors'))
     if Player1 == Player2:
         return 'Tie'
     elif Player1 == 'Rock':
@@ -65,39 +66,37 @@ def GM2Winner():
 def GM1():
     choose = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
     PlayerName = enterbox('Enter you name.', Title, 'Name: ')
-    Player1 = buttonbox(PN[5:] , Title,\
-    ('Rock', 'Paper', 'Scissors'))
-    CPUChoice = random.choice(Choices)
-    funct = GM1winner(PlayerName)
+    GM1Winner = GM1winner(PlayerName)
 
 
 
     ####Need to fix the winner function.######
-    if funct == 'CPU':
+    if GM1Winner == 'CPU':
         msgbox('Sorry! You lose.', Title,'OK','Loser_Picture.jpg')
-    elif funct == 'Player1':
+    elif GM1Winner == 'Player1':
         #Insert "You Win" Picture here
         msgbox('Congratulations! You WIN!!', Title, ok_button = 'Go Back')
     else:
-        #Insert Tie Here
-        pass
+        msgbox('You tied!! Nobody won.', Title, ok_button = 'Go Back')
 
 
 #GameMode 2: Player 1 vs. Player 2
-#P2N = Player 2 Name
 def GM2():
     choose = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
-    PN = enterbox('Player 1, enter your name.', Title, 'Name: ')
-    P2N = enterbox('Player 2, enter your name.', Title, 'Name: ')
+    P1name = enterbox('Player 1, enter your name.', Title, 'Name: ')
+    P2Name = enterbox('Player 2, enter your name.', Title, 'Name: ')
     #Insert Player 1 and Player 2 variables here
-    PlayerChoice = buttonbox('Player 1 choose', Title,\
-    ('Rock', 'Paper', 'Scissors'))
-    Player2Choice = buttonbox('Player 2 choose', Title, \
-    ('Rock', 'Paper', 'Scissors'))
-    otherfunct = GM2Winner()
-        #Put the P1 v. P2 parameter here
+    GM2Winnerr = GM2Winner(P1name, P2Name)
  
 
+    if GM2Winnerr == 'Player1':
+        msgbox('Player1 wins!', Title, ok_button = 'Go Back')
+    elif GM2Winnerr == 'Player2':
+        msgbox('Player2 wins!', Title, ok_button = 'Go Back')
+    else:
+        msgbox('You both tied!! Nobody won.', Title, ok_button = 'Go Back')
+        
+        
 
 
 ##----------------------------------------
