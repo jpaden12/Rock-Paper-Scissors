@@ -19,7 +19,6 @@ class CPU(object):
 Computer = CPU()
 
 
-
 # Players Class
 class Players(object):
     def __init__(self):
@@ -37,16 +36,25 @@ class Players(object):
 
 ObjPlayer1 = Players()
 ObjPlayer2 = Players()
-        
 
 
+#-------------------------------------------------------------#
+    
+#GameMode 1: Player 1 vs. CPU
+def GM1():
+    GameMode = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
 
+    if GameMode == 'Best of 3':
+        MatchDigit = 3
+    elif GameMode == 'Best of 5':
+        MatchDigit = 5
+    else:
+        MatchDigit = 7
 
-# The two functions that choose the winner
-def GM1winner():
+    ObjPlayer1.chooseName()
     MatchNumber = 1
     
-    while MatchNumber <= 5:
+    while MatchNumber <= MatchDigit:
         match_screen = msgbox('Match Number ' + str(MatchNumber) + '\n' + ObjPlayer1.name[5:] + ': ' + str(ObjPlayer1.score) + '\n' \
                               'CPU: ' + str(Computer.score), Title)
         P1Weapon = ObjPlayer1.chooseWeapon()
@@ -75,20 +83,35 @@ def GM1winner():
         MatchNumber += 1
         
     if ObjPlayer1.score > Computer.score:
-        return 'Player1'
+        msgbox('Congratulations! You WIN!!', Title, ok_button = 'Go Back')
     elif ObjPlayer1.score == Computer.score:
-        return 'Tie'
+        msgbox('You tied!! Nobody won.', Title, ok_button = 'Go Back')
     else:
-        return 'CPU'
-
-
-
-#-------------------------------------------------------------#
-#Player vs. Player Mode
-def GM2Winner():
+        msgbox('Sorry! You lose.', Title,'OK','Loser_Picture.jpg')
+        
+    Computer.score = 0
+    ObjPlayer1.score = 0
     MatchNumber = 1
-    
-    while MatchNumber <= 5:
+
+
+
+#GameMode 2: Player 1 vs. Player 2
+def GM2():
+    GameMode = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
+
+    if GameMode == 'Best of 3':
+        MatchDigit = 3
+    elif GameMode == 'Best of 5':
+        MatchDigit = 5
+    else:
+        MatchDigit = 7
+
+    ObjPlayer1.chooseName()
+    ObjPlayer2.chooseName()
+
+    MatchNumber = 1
+
+    while MatchNumber <= MatchDigit:
         match_screen = msgbox('Match Number ' + str(MatchNumber) + '\n' + ObjPlayer1.name[5:] + ': ' + str(ObjPlayer1.score) + '\n' \
                         + ObjPlayer2.name[5:] + ': ' + str(ObjPlayer2.score), Title)
             
@@ -97,8 +120,8 @@ def GM2Winner():
 
         # Must use a variable in place of the spliced names everywhere
         msgbox(ObjPlayer1.name[5:] + ' chose ' + P1Weapon + '\n' + ObjPlayer2.name[5:] + ' chose ' + P2Weapon, 'Title')
-                   
-            
+   
+           
         if P1Weapon == P2Weapon:
             ObjPlayer1.score += 0
             ObjPlayer2.score += 0
@@ -119,57 +142,17 @@ def GM2Winner():
                 ObjPlayer1.score += 1
         MatchNumber += 1
 
-    if ObjPlayer1.score > ObjPlayer2.score:
-        return 'Player1'
-    elif ObjPlayer1.score == ObjPlayer2.score:
-        return 'Tie'
-        else:
-            return 'Player2'
-    
-    
         
-
-# GameMode 1: Player 1 vs. CPU
-# Number = The number of games to be played
-def GM1():
-    choose = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
-    ObjPlayer1.chooseName()
-    GM1Winner = GM1winner()
-
-            ##GMWinner funtion with the screens and stuff...
-
-    ####Need to fix the winner function.######
-    if GM1Winner == 'CPU':
-        msgbox('Sorry! You lose.', Title,'OK','Loser_Picture.jpg')
-    elif GM1Winner == 'Player1':
-        #Insert "You Win" Picture here
-        msgbox('Congratulations! You WIN!!', Title, ok_button = 'Go Back')
-    else:
-        msgbox('You tied!! Nobody won.', Title, ok_button = 'Go Back')
-    Computer.score = 0
-    ObjPlayer1.score = 0
-    MatchNumber = 1
-    
-
-#GameMode 2: Player 1 vs. Player 2
-def GM2():
-    choose = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
-    ObjPlayer1.chooseName()
-    ObjPlayer2.chooseName()
-    
-    #Insert Player 1 and Player 2 variables here
-    GM2Winnerr = GM2Winner()
-
-    if GM2Winnerr == 'Player1':
-        msgbox(ObjPlayer1.name + ' wins!', Title, ok_button = 'Go Back')
-    elif GM2Winnerr == 'Player2':
-        msgbox(ObjPlayer2.name + ' wins!', Title, ok_button = 'Go Back')
-    else:
+    if ObjPlayer1.score > ObjPlayer2.score:
+        msgbox(ObjPlayer1.name[5:] + ' wins!', Title, ok_button = 'Go Back')
+    elif ObjPlayer1.score == ObjPlayer2.score:
         msgbox('You both tied!! Nobody won.', Title, ok_button = 'Go Back')
+    else:
+        msgbox(ObjPlayer2.name[5:] + ' wins!', Title, ok_button = 'Go Back')
+
     ObjPlayer1.score = 0
     ObjPlayer2.score = 0
-    MatchNumber = 1
-        
+    MatchNumber = 1        
         
 
 
