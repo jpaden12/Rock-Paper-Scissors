@@ -1,4 +1,5 @@
 import random
+import sys
 import easygui
 from easygui import *
 
@@ -52,10 +53,11 @@ def GM1():
         MatchDigit = 7
 
     ObjPlayer1.chooseName()
+    P1Name = ObjPlayer1.name[5:]
     MatchNumber = 1
     
     while MatchNumber <= MatchDigit:
-        match_screen = msgbox('Match Number ' + str(MatchNumber) + '\n' + ObjPlayer1.name[5:] + ': ' + str(ObjPlayer1.score) + '\n' \
+        match_screen = msgbox('Match Number ' + str(MatchNumber) + '\n' + P1Name + ': ' + str(ObjPlayer1.score) + '\n' \
                               'CPU: ' + str(Computer.score), Title)
         P1Weapon = ObjPlayer1.chooseWeapon()
         CPUChoice = Computer.chooseWeapon()
@@ -96,6 +98,7 @@ def GM1():
 
 
 #GameMode 2: Player 1 vs. Player 2
+
 def GM2():
     GameMode = buttonbox('Choose the number of games!', Title, ('Best of 3', 'Best of 5', 'Best of 7'))
 
@@ -109,17 +112,20 @@ def GM2():
     ObjPlayer1.chooseName()
     ObjPlayer2.chooseName()
 
+    P1Name = ObjPlayer1.name[5:]
+    P2Name = ObjPlayer2.name[5:]
+
     MatchNumber = 1
 
     while MatchNumber <= MatchDigit:
-        match_screen = msgbox('Match Number ' + str(MatchNumber) + '\n' + ObjPlayer1.name[5:] + ': ' + str(ObjPlayer1.score) + '\n' \
-                        + ObjPlayer2.name[5:] + ': ' + str(ObjPlayer2.score), Title)
+        match_screen = msgbox('Match Number ' + str(MatchNumber) + '\n' + P1Name + ': ' + str(ObjPlayer1.score) + '\n' \
+                        + P2Name + ': ' + str(ObjPlayer2.score), Title)
             
         P1Weapon = ObjPlayer1.chooseWeapon()
         P2Weapon = ObjPlayer2.chooseWeapon()
 
         # Must use a variable in place of the spliced names everywhere
-        msgbox(ObjPlayer1.name[5:] + ' chose ' + P1Weapon + '\n' + ObjPlayer2.name[5:] + ' chose ' + P2Weapon, 'Title')
+        msgbox(P1Name + ' chose ' + P1Weapon + '\n' + P2Name + ' chose ' + P2Weapon, 'Title')
    
            
         if P1Weapon == P2Weapon:
@@ -144,11 +150,11 @@ def GM2():
 
         
     if ObjPlayer1.score > ObjPlayer2.score:
-        msgbox(ObjPlayer1.name[5:] + ' wins!', Title, ok_button = 'Go Back')
+        msgbox(P1Name + ' wins!', Title, ok_button = 'Go Back')
     elif ObjPlayer1.score == ObjPlayer2.score:
         msgbox('You both tied!! Nobody won.', Title, ok_button = 'Go Back')
     else:
-        msgbox(ObjPlayer2.name[5:] + ' wins!', Title, ok_button = 'Go Back')
+        msgbox(P2Name + ' wins!', Title, ok_button = 'Go Back')
 
     ObjPlayer1.score = 0
     ObjPlayer2.score = 0
@@ -169,9 +175,8 @@ while TitleScreen == True:
         TitleScreen == True
     if a == 'Exit':
         TitleScreen == False
-        #Insert Exit method here
-        msgbox("Insert Exit method here")
-        TitleScreen == True
+        sys.exit(0)
+        
     if a == 'Start':
         TitleScreen == False
         b = buttonbox('Game Modes', 'Game Modes',('Player 1 vs. CPU', 'Player 1 vs. Player 2'))
